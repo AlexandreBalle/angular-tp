@@ -6,7 +6,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  constructor() {
+  nightMode: string;
 
+  constructor() { }
+
+  onNightModeChange(evt: any) {
+    this.nightMode = evt.value;
   }
 }

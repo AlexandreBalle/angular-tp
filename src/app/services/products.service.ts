@@ -1,49 +1,31 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
-import { Subject } from 'rxjs';
 import { Product } from '../models/product.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductsService {
-  productsSubject = new Subject<Product[]>();
-  products = [
-    {
-      name: 'Cahier',
-      price: 5
-    },
-    {
-      name: 'Gomme',
-      price: 2
-    },
-    {
-      name: 'Trousse',
-      price: 10
-    }
-  ];
-  constructor() {
-    this.getProducts();
+
+  private _headers = new HttpHeaders({'Content-Type':'application/json'})
+  constructor(private http: HttpClient) { }
+
+  addProduct(product: Product): Observable<Product[]> {
+    let urlWs = "./catalogue/private/products";
+    console.log(product);
+    return this.http.post<Product[]>(urlWs, product, {headers: this._headers});
   }
 
-  emitProducts() {
-    this.productsSubject.next(this.products);
-  }
-
-  getProducts() {
-    return this.products;
+  getAllProducts(): Observable<Product[]> {
+    let urlWs = "./catalogue/public/products";
+    return this.http.get<Product[]>(urlWs);
   }
 
   removeProduct(product: Product) {
-    const productIndex = this.products.findIndex(
-      (productValue) => {
-        if(productValue === product) {
-          return true;
-        }
-      }
-    );
-    this.products.splice(productIndex, 1);
-    this.emitProducts();
+    let urlWs = "./catalogue/private/products/" + product.id;
+    console.log(urlWs);
+    return this.http.delete<void[]>(urlWs);
   }
-
 }

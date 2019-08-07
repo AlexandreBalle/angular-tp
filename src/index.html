@@ -4,11 +4,21 @@
   <meta charset="utf-8">
   <title>Angular Cours</title>
   <base href="/">
+  <style>
+    html {
+      height: 100%;
+    }
 
+    body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
-<body>
+<body [style.backgroundColor]='backgroundColor'>
   <app-root></app-root>
 </body>
 </html>

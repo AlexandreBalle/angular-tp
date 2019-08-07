@@ -1,4 +1,6 @@
-<app-header></app-header>
-<div class="container">
-  <router-outlet></router-outlet>
+<app-header (colorEvent)="onNightModeChange($event)"></app-header>
+<div [ngStyle]="{'transition': 'all 0.5s ease-in-out', 'backgroundColor':nightMode ? 'gray' : 'white', 'height': '100%'}">
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
 </div>

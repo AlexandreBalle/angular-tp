@@ -1,20 +1,22 @@
-<div class="row">
+<div  class="row-fluid"
+      [ngStyle]="{'padding': '25px'}">
   <div class="col-xs-12">
     <h2>Products :</h2>
     <div class="list-group">
-      <button
-        class="list-group-item"
-        *ngFor="let product of products; let i = index"
-        (click)="onViewProduct(i)">
+      <a class="list-group-item"
+         *ngFor="let product of products; let i = index"
+         [ngStyle]="{'backgroundColor': getNightMode() ? 'darkwhite' : 'white'}">
         <h3 class="list-group-item-heading">
           {{ product.name }}
           <button class="btn btn-default pull-right" (click)="onDeleteProduct(product)">
-            <span class="glyphicon glyphicon-minus"></span>
+            <i class="fa fa-minus" aria-hidden="true"></i>
           </button>
         </h3>
         <p class="list-group-item-text">{{ product.price }} €</p>
-      </button>
+      </a>
     </div>
-    <button class="btn btn-primary" (click)="onNewProduct()">Add new product</button>
   </div>
+</div>
+<div class="row-fluid">
+  <button class="btn btn-primary" (click)="onNewProduct()">Add new product</button>
 </div>

@@ -1,12 +1,25 @@
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <ul class="nav navbar-nav">
-      <li routerLinkActive="active">
-        <a routerLink="products">Products</a>
-      </li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-
-    </ul>
-  </div>
+<nav class="navbar navbar-expand-lg"
+     [ngClass]="nightMode ? 'navbar-dark bg-dark' : 'navbar-light bg-light'"
+     [ngStyle]="{'transition': 'all 0.5s ease-in-out'}">
+  <a class="navbar-brand" routerLink="products">{{ projectName }}</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+   <ul class="navbar-nav mr-auto">
+     <li routerLinkActive="active" class="nav-item">
+       <a routerLink="products" class="nav-link">Products</a>
+     </li>
+   </ul>
+   <ul class="nav navbar-nav navbar-right">
+     <li>
+       <div class="custom-control custom-switch navbar-text">
+          <input  type="checkbox" class="custom-control-input"
+                  id="customSwitch1" [(ngModel)]="isChecked"
+                  (change)="setNightMode(isChecked ? true : false)">
+          <label class="custom-control-label" for="customSwitch1">Night Mode</label>
+        </div>
+     </li>
+   </ul>
+ </div>
 </nav>

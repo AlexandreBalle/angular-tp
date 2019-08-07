@@ -1,0 +1,6 @@
+{
+	"/catalogue" : {
+		"secure" : false,
+		"target" : "http://localhost:8282"
+	}
+}

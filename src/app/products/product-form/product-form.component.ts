@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { ProductsService } from '../../services/products.service';
+import { Product } from '../../models/product.model';
 
 @Component({
   selector: 'app-product-form',
@@ -30,7 +31,11 @@ export class ProductFormComponent implements OnInit {
   onSaveProduct() {
     const name = this.productForm.get('name').value;
     const price = this.productForm.get('price').value;
-    this.productsService.products.push({name, price});
+    this.productsService.addProduct(new Product(1, name, parseInt(price)))
+                        .subscribe(
+                          (product) => { console.log('Produit enregistrer :' + product) },
+                          (err) => { console.log(err) }
+                        );
     this.router.navigate(['/products']);
   }
 }

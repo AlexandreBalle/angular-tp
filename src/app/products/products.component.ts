@@ -3,33 +3,43 @@ import { Router } from '@angular/router';
 
 import { Subscription } from 'rxjs';
 import { ProductsService } from '../services/products.service';
+import { AppService } from '../services/app.service';
 import { Product } from '../models/product.model';
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
-  styleUrls: ['./products.component.scss']
+  styleUrls: ['./products.component.scss'],
 })
 export class ProductsComponent implements OnInit {
-  productSubscription: Subscription;
-  products: Product[];
   constructor(private productService: ProductsService,
-              private router: Router) { }
+              private appService: AppService,
+              private router: Router) {
+                this.productService.getAllProducts()
+                       .subscribe( (listeProd) => { this.products = listeProd },
+                                   (err) => { console.log(err) });
+              }
 
-  ngOnInit() {
-    this.productSubscription = this.productService.productsSubject.subscribe(
-      (products: Product[]) => {
-        this.products = products;
-      }
-    );
-    this.productService.emitProducts();
-  }
+  productSubscription: Subscription;
+  nightModeSubscription: Subscription;
+  products: Product[];
+  nightMode: boolean;
+
+  ngOnInit() { }
 
   onNewProduct() {
     this.router.navigate(['/products/new']);
   }
 
   onDeleteProduct(product: Product) {
-    this.productService.removeProduct(product);
+    this.productService.removeProduct(product)
+                       .subscribe(
+                          (productDelete) => { console.log('Produit supprimer :' + productDelete) },
+                          (err) => { console.log(err) }
+                       );
+  }
+
+  getNightMode() {
+    return this.appService.getNightMode();
   }
 }
