@@ -11,13 +11,15 @@ import { ProductsComponent } from './products/products.component';
 import { ProductFormComponent } from './products/product-form/product-form.component';
 
 import { AppService } from './services/app.service';
+import { SingleProductComponent } from './products/single-product/single-product.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     ProductsComponent,
-    ProductFormComponent
+    ProductFormComponent,
+    SingleProductComponent
   ],
   imports: [
     BrowserModule,

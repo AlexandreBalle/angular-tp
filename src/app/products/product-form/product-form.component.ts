@@ -31,7 +31,7 @@ export class ProductFormComponent implements OnInit {
   onSaveProduct() {
     const name = this.productForm.get('name').value;
     const price = this.productForm.get('price').value;
-    this.productsService.addProduct(new Product(1, name, parseInt(price)))
+    this.productsService.addProduct(new Product(name, parseInt(price)))
                         .subscribe(
                           (product) => { console.log('Produit enregistrer :' + product) },
                           (err) => { console.log(err) }
